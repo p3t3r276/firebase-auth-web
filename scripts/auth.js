@@ -1,6 +1,8 @@
 auth.onAuthStateChanged(user => {
   if (user) {
-    db.collection("guides").onSnapshot(snapshot => setupGuides(snapshot.docs));
+    db.collection("guides")
+      .onSnapshot(snapshot => setupGuides(snapshot.docs))
+      .catch(err => console.error(err));
     setUI(user);
   } else {
     setUI();
