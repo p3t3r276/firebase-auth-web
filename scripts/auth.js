@@ -72,6 +72,10 @@ signupForm.addEventListener("submit", e => {
       const modal = document.querySelector("#modal-signup");
       M.Modal.getInstance(modal).close();
       signupForm.reset();
+      signupForm.querySelector(".error").innerHTML = "";
+    })
+    .catch(err => {
+      signupForm.querySelector(".error").innerHTML = err.message;
     });
 });
 
@@ -92,10 +96,16 @@ loginForm.addEventListener("submit", e => {
   const email = loginForm["login-email"].value;
   const password = loginForm["login-password"].value;
 
-  auth.signInWithEmailAndPassword(email, password).then(cred => {
-    console.log(cred.user);
-    const modal = document.querySelector("#modal-login");
-    M.Modal.getInstance(modal).close();
-    loginForm.reset();
-  });
+  auth
+    .signInWithEmailAndPassword(email, password)
+    .then(cred => {
+      console.log(cred.user);
+      const modal = document.querySelector("#modal-login");
+      M.Modal.getInstance(modal).close();
+      loginForm.reset();
+      loginForm.querySelector(".error").innerHTML = "";
+    })
+    .catch(err => {
+      loginForm.querySelector(".error").innerHTML = err.message;
+    });
 });
